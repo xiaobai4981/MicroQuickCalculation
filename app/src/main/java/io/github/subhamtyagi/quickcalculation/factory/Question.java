@@ -2,63 +2,84 @@ package io.github.subhamtyagi.quickcalculation.factory;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.Random;
+import java.util.Set;
 
 public class Question {
-    private final ArrayList<Integer> arrayList = new ArrayList<>(4);
+    private final ArrayList<Integer> options = new ArrayList<>(4);
     private final String question;
     private final int correctAnswer;
 
-    Question(String question, int correctAnswer) {
+    Question(String question, int correctAnswer, Boolean ignoreNegative) {
         this.question = question;
         this.correctAnswer = correctAnswer;
-
+        options.add(correctAnswer);
         Random r = new Random();
-        boolean b = r.nextBoolean();
-        boolean c = r.nextBoolean();
-        if (b) {
-            arrayList.add(correctAnswer + 30);
-            arrayList.add(correctAnswer + 10);
-            arrayList.add(correctAnswer + 20);
+        if (correctAnswer > 40) {
+            boolean b = r.nextBoolean();
+            boolean c = r.nextBoolean();
+            if (b) {
+                options.add(correctAnswer + 30);
+                options.add(correctAnswer + 10);
+                options.add(correctAnswer + 20);
 
-        } else if (c) {
-            arrayList.add(correctAnswer - 30);
-            arrayList.add(correctAnswer + 10);
-            arrayList.add(correctAnswer - 20);
+            } else if (c) {
+                options.add(correctAnswer - 30);
+                options.add(correctAnswer + 10);
+                options.add(correctAnswer - 20);
+            } else {
+                options.add(correctAnswer - 30);
+                options.add(correctAnswer - 10);
+                options.add(correctAnswer - 20);
+            }
+        } else if (correctAnswer > 20) {
+            while (options.size() < 4) {
+                int offset = r.nextInt(15) + 5;
+                int wrongAnswer = r.nextBoolean() ? correctAnswer + offset : correctAnswer - offset;
+                if (ignoreNegative && wrongAnswer < 0) continue;
+                if (!options.contains(wrongAnswer)) {
+                    options.add(wrongAnswer);
+                }
+            }
+
+        } else if (correctAnswer > 10) {
+            while (options.size() < 4) {
+                int offset = r.nextInt(8) + 5;
+                int wrongAnswer = r.nextBoolean() ? correctAnswer + offset : correctAnswer - offset;
+                if (ignoreNegative && wrongAnswer < 1) continue;
+                if (!options.contains(wrongAnswer)) {
+                    options.add(wrongAnswer);
+                }
+            }
+        } else if (correctAnswer < -30) {
+            boolean b = r.nextBoolean();
+            boolean c = r.nextBoolean();
+            if (b) {
+                options.add(correctAnswer + 30);
+                options.add(correctAnswer + 10);
+                options.add(correctAnswer + 20);
+
+            } else if (c) {
+                options.add(correctAnswer - 30);
+                options.add(correctAnswer + 10);
+                options.add(correctAnswer - 20);
+            } else {
+                options.add(correctAnswer - 30);
+                options.add(correctAnswer - 10);
+                options.add(correctAnswer - 20);
+            }
         } else {
-            arrayList.add(correctAnswer - 30);
-            arrayList.add(correctAnswer - 10);
-            arrayList.add(correctAnswer - 20);
+            while (options.size() < 4) {
+                int offset = r.nextInt(3) + 5;
+                int wrongAnswer = r.nextBoolean() ? correctAnswer + offset : correctAnswer - offset;
+                if (ignoreNegative && wrongAnswer < 1) continue;
+                if (!options.contains(wrongAnswer)) {
+                    options.add(wrongAnswer);
+                }
+            }
         }
-        arrayList.add(correctAnswer);
-        Collections.shuffle(arrayList);
-
-    }
-
-    @SuppressWarnings("unused")
-    Question(String question, int correctAnswer, int wrongAnswer) {
-        this.question = question;
-        this.correctAnswer = correctAnswer;
-
-        Random r = new Random();
-        boolean b = r.nextBoolean();
-        boolean c = r.nextBoolean();
-        if (b) {
-            arrayList.add(wrongAnswer);
-            arrayList.add(correctAnswer + 10);
-            arrayList.add(correctAnswer + 20);
-
-        } else if (c) {
-            arrayList.add(wrongAnswer);
-            arrayList.add(correctAnswer - 10);
-            arrayList.add(correctAnswer - 20);
-        } else {
-            arrayList.add(wrongAnswer);
-            arrayList.add(correctAnswer - 10);
-            arrayList.add(correctAnswer + 20);
-        }
-        arrayList.add(correctAnswer);
-        Collections.shuffle(arrayList);
+        Collections.shuffle(options);
 
     }
 
@@ -67,19 +88,19 @@ public class Question {
     }
 
     public String getOption1() {
-        return arrayList.get(0).toString();
+        return options.get(0).toString();
     }
 
     public String getOption2() {
-        return arrayList.get(1).toString();
+        return options.get(1).toString();
     }
 
     public String getOption3() {
-        return arrayList.get(2).toString();
+        return options.get(2).toString();
     }
 
     public String getOption4() {
-        return arrayList.get(3).toString();
+        return options.get(3).toString();
     }
 
     public int getCorrectAnswer() {

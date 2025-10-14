@@ -8,7 +8,7 @@ public class GenerateQuestion {
         Random rand = new Random();
         int a = rand.nextInt(range_max - range_min + 1) + range_min;
         int b = rand.nextInt(range_max2 - range_min2 + 1) + range_min2;
-        return new Question(a + " x " + b, a * b);
+        return new Question(a + " x " + b, a * b,true);
         // "The End, Bas Yahi tak tha jo tha ";
 
     }
@@ -17,7 +17,7 @@ public class GenerateQuestion {
         Random rand = new Random();
         int a = rand.nextInt(range_max - range_min + 1) + range_min;
         int b = rand.nextInt(range_max2 - range_min2 + 1) + range_min2;
-        return new Question(a + " - " + b, a - b);
+        return new Question(a + " - " + b, a - b, false);
         // "The End, Bas Yahi tak tha jo tha ";
 
     }
@@ -26,7 +26,7 @@ public class GenerateQuestion {
         Random rand = new Random();
         int a = rand.nextInt(range_max - range_min + 1) + range_min;
         int b = rand.nextInt(range_max2 - range_min2 + 1) + range_min2;
-        return new Question(a + " + " + b, a + b);
+        return new Question(a + " + " + b, a + b, true);
     }
 
     public static Question division(int range_min, int range_max, int range_min2, int range_max2) {
@@ -39,7 +39,7 @@ public class GenerateQuestion {
             divisor = Math.min(a, b);
         } while (divisor == 0);
         int answer = dividend / divisor;
-        return new Question(dividend + "÷" + divisor, answer);
+        return new Question(dividend + "÷" + divisor, answer,true);
     }
 
     public static Question mix(int mLowerRange1, int mUpperRange1, int mLowerRange2, int mUpperRange2) {
@@ -78,7 +78,7 @@ public class GenerateQuestion {
             questionBuilder.append(a);
             answer += a;
         }
-        return new Question(questionBuilder.toString(), answer);
+        return new Question(questionBuilder.toString(), answer,true);
     }
 
     public static Question simplification(int range_min, int range_max) {
@@ -105,7 +105,7 @@ public class GenerateQuestion {
                 } else stringBuffer.append("+");
             }
         } while (j < length);
-        return new Question(stringBuffer.toString(), answer);
+        return new Question(stringBuffer.toString(), answer,false);
 
     }
 
@@ -167,7 +167,7 @@ public class GenerateQuestion {
             }
 
         } while (j < length);
-        return new Question(stringBuffer.toString(), answer);
+        return new Question(stringBuffer.toString(), answer,false);
     }
 
     private static Node generateTreeNode(int n1, int n2, int n3, String operator) {
