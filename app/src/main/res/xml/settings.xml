@@ -42,17 +42,17 @@
             	
             </androidx.preference.PreferenceCategory>
     
-    <PreferenceCategory
-        android:minHeight="48dp"
-        android:title="About">
+<!--    <PreferenceCategory-->
+<!--        android:minHeight="48dp"-->
+<!--        android:title="About">-->
 
-        <Preference
-            android:summary="Quick calculation is open source app. Click here to visit source code repository on GitHub "
-            android:title="Source Code">
-            <intent
-                android:action="android.intent.action.VIEW"
-                android:data="https://github.com/SubhamTyagi/quick-calculation" />
-        </Preference>
-    </PreferenceCategory>
+<!--        <Preference-->
+<!--            android:summary="Quick calculation is open source app. Click here to visit source code repository on GitHub "-->
+<!--            android:title="Source Code">-->
+<!--            <intent-->
+<!--                android:action="android.intent.action.VIEW"-->
+<!--                android:data="https://github.com/SubhamTyagi/quick-calculation" />-->
+<!--        </Preference>-->
+<!--    </PreferenceCategory>-->
     
 </androidx.preference.PreferenceScreen>

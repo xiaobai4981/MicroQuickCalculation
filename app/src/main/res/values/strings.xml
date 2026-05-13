@@ -8,7 +8,7 @@
     <string name="key_notification_minutes" translatable="false">notification_minutes</string>
     <string name="is_theme_changed" translatable="false">is_theme_changed</string>
 
-    <string name="app_name">Quick Calculation</string>
+    <string name="app_name">Micro Quick Calculation</string>
     <string name="action_settings">Settings</string>
     <string name="operators">Operators</string>
     <string name="timer">Timer</string>

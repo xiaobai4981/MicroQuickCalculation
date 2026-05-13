@@ -7,13 +7,25 @@ android {
     namespace = "io.github.subhamtyagi.quickcalculation"
 
     defaultConfig {
-        applicationId "io.github.subhamtyagi.quickcalculation"
+        applicationId "com.huzhou.microquickcalculation"
         //multiDexEnabled true
-        minSdkVersion 21
+        minSdkVersion 24
         targetSdkVersion 36
-        versionCode 5
-        versionName "1.4"
+        versionCode 1
+        versionName "1.0"
 
+    }
+
+    signingConfigs {
+        def keystorePropertiesFiles = rootProject.file("keystore.properties")
+        def keystoreProperties = new Properties()
+        keystoreProperties.load(new FileInputStream(keystorePropertiesFiles))
+        basic {
+            storeFile file(keystoreProperties['storeFile'])
+            storePassword keystoreProperties['storePassword']
+            keyAlias keystoreProperties['keyAlias']
+            keyPassword keystoreProperties['keyPassword']
+        }
     }
 
     buildTypes {
@@ -22,6 +34,7 @@ android {
             shrinkResources true
             zipAlignEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.basic
         }
     }
     compileOptions {
