@@ -10,6 +10,7 @@ import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.SwitchPreferenceCompat;
 import com.google.android.material.color.DynamicColors;
 
+import io.github.subhamtyagi.quickcalculation.ads.AdManager;
 import io.github.subhamtyagi.quickcalculation.dialog.TimeDialog;
 import io.github.subhamtyagi.quickcalculation.utils.SpUtil;
 
@@ -45,6 +46,7 @@ public class SettingsActivity extends AppCompatActivity {
             /*ListPreference theme = findPreference(getString(R.string.pf_theme));*/
             SwitchPreferenceCompat notification = findPreference(getString(R.string.pf_notification_switch));
             Preference time = findPreference(getString(R.string.pf_notification_time));
+            SwitchPreferenceCompat vibrationPref = findPreference(getString(R.string.pf_vibration_switch));
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 assert notification != null;
@@ -70,6 +72,17 @@ public class SettingsActivity extends AppCompatActivity {
                 time.setVisible(false);
             }
 
+            if (vibrationPref != null) {
+                vibrationPref.setOnPreferenceChangeListener((preference, newValue) -> {
+                    boolean isOn = (Boolean) newValue;
+
+                    if (isOn) {
+                        AdManager.getInstance().maybeShowAd(this.getActivity());
+                    }
+
+                    return true; // 允许切换并保存
+                });
+            }
            /* assert theme != null;
             theme.setOnPreferenceChangeListener((preference, newValue) -> {
                 theme.setSummary((String) newValue);

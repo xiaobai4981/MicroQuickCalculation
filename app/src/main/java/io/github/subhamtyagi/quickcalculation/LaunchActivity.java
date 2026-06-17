@@ -23,6 +23,7 @@ import com.google.android.material.color.DynamicColors;
 
 import java.util.Calendar;
 
+import io.github.subhamtyagi.quickcalculation.ads.AdManager;
 import io.github.subhamtyagi.quickcalculation.utils.CrashUtils;
 import io.github.subhamtyagi.quickcalculation.utils.SpUtil;
 import io.github.subhamtyagi.quickcalculation.utils.Utils;
@@ -39,7 +40,7 @@ public class LaunchActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        AdManager.getInstance().init(this);
         new CrashUtils(getApplicationContext(), "");
         SpUtil.getInstance().init(this);
         /*setTheme(Utils.getTheme(this));*/
